@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Welcome</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/welcome.css' %}">
+    </head>
+    <div class="container">
+        <body>
+            <div class="box">
+                <div class="title"><p style="font-family: 'Circular Std',serif">
+                    Welcome to <br>Melody Madness!</div>
+                <div class="description"><p style="font-family: 'Circular Std',serif">
+                    The app that pits your favorite artists in musical competition.</div>
+                <div class="click"><p style="font-family: 'Circular Std',serif">
+                    Click below to get started:</div>
+                <button class="btn default">
+                    <a href="{% url 'auth' %}"><img src="{% static 'images/Log_In_With.png'%}"></a>
+                </button>
+            </div>
+        </body>
+    </div>
+</html>

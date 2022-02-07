@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <link rel = "stylesheet" type="text/css" href ="{% static 'css/tournament-styles.css' %}">
+        <title>Tournament bracket</title>
+    </head>
+    <body>
+        <h1>Vote Below!</h1>
+        <form action="{% url 'vote_bracket' %}" method="POST">
+            <main id="tournament">
+                {% csrf_token %}
+                <!--<div class="radio">-->
+<!--ROUND 1 LEFT ------------------------------------------------------------------->
+                <ul class="rounds round-1-left">
+                    <li class="spacer">&nbsp;</li>
+
+                    <li  class="bracket pair-1-top">
+
+                        <label>
+                            <input type="radio" name="pair0" value="option0">
+                            <img src="{{ images.0 }}" height="50px"/>
+                            {{ artists.0 }}
+
+                        </label>
+                    </li>
+
+                    <li class="bracket bracket-spacer-left">&nbsp;</li>
+
+                    <li class="bracket pair-1-bottom">
+                        <label>
+                            <input type="radio" name="pair0" value="option1">
+                            <img src="{{ images.1 }}" height="50px"/>
+                            {{ artists.1 }}
+                        </label>
+                    </li>
+
+                    <li class="spacer">&nbsp;</li>
+
+                    <li class="bracket pair-2-top">
+                        <label>
+                            <input type="radio" name="pair1" value="option2">
+                            <img src="{{ images.2 }}" height="50px"/>
+                            {{ artists.2 }}
+                        </label>
+                    </li>
+                    <li class="bracket bracket-spacer-left">&nbsp;</li>
+                    <li class="bracket pair-2-bottom">
+                        <label>
+                            <input type="radio" name="pair1" value="option3">
+                            <img src="{{ images.3 }}" height="50px"/>
+                            {{ artists.3 }}
+                        </label>
+                    </li>
+
+                    <li class="spacer">&nbsp;</li>
+
+                    <li class="bracket pair-3-top">
+                        <label>
+                            <input type="radio" name="pair2" value="option4">
+                            <img src="{{ images.4 }}" height="50px"/>
+                            {{ artists.4 }}
+                        </label>
+                    </li>
+                    <li class="bracket bracket-spacer-left">&nbsp;</li>
+                    <li class="bracket pair-3-bottom ">
+                        <label>
+                            <input type="radio" name="pair2" value="option5">
+                            <img src="{{ images.5 }}" height="50px"/>
+                            {{ artists.5 }}
+                        </label>
+                    </li>
+
+                    <li class="spacer">&nbsp;</li>
+
+                    <li class="bracket pair-4-top">
+                        <label>
+                            <input type="radio" name="pair3" value="option6">
+                            <img src="{{ images.6 }}" height="50px"/>
+                            {{ artists.6 }}
+                        </label>
+                    </li>
+                    <li class="bracket bracket-spacer-left">&nbsp;</li>
+                    <li class="bracket pair-4-bottom ">
+                        <label>
+                            <input type="radio" name="pair3" value="option7">
+                            <img src="{{ images.7 }}" height="50px"/>
+                            {{ artists.7 }}
+                        </label>
+                    </li>
+
+                    <li class="spacer">&nbsp;</li>
+                </ul>
+<!--ROUND 2 LEFT ------------------------------------------------------------------->
+                <ul class="rounds round-2-left">
+                    <li class="spacer">&nbsp;</li>
+
+                    <li class="bracket pair-1-top">
+                        <label>
+                            <input type="radio" name="pair0-2" value="option0">
+                                {% if votes.option_0_count == 1 %}
+                                    {{ artists.0 }}
+                                {% elif votes.option_1_count == 1%}
+                                    {{ artists.1 }}
+                                {% endif %}
+
+                        </label>
+                    </li>
+
+                    <li class="bracket bracket-spacer-left">&nbsp;</li>
+                    <li class="bracket pair-1-bottom ">
+                        <label>
+                            <input type="radio" name="pair0-2" value="option1">
+                                {% if votes.option_2_count == 1 %}
+                                    {{ artists.2 }}
+                                {% elif votes.option_3_count == 1 %}
+                                    {{ artists.3 }}
+                                {% endif %}
+                        </label>
+                    </li>
+
+                    <li class="spacer">&nbsp;</li>
+
+                    <li class="bracket pair-2-top">
+                        <label>
+                            <input type="radio" name="pair1-2" value="option2">
+                            <!--{{ vote.round2_pair1_1 }}-->
+                                {% if votes.option_4_count %}
+                                    {{ artists.4 }}
+                                {% elif votes.option_5_count %}
+                                    {{ artists.5 }}
+                                {% endif %}
+                        </label>
+                    </li>
+                    <li class="bracket bracket-spacer-left">&nbsp;</li>
+                    <li class="bracket pair-2-bottom ">
+                        <label>
+                            <input type="radio" name="pair1-2" value="option3">
+                            <!--{{ vote.round2_pair1_2 }}-->
+                                {% if votes.option_6_count %}
+                                    {{ artists.6 }}
+                                {% elif votes.option_7_count %}
+                                    {{ artists.7 }}
+                                {% endif %}
+                        </label>
+                    </li>
+
+                    <li class="spacer">&nbsp;</li>
+                </ul>
+<!--ROUND 3 LEFT ------------------------------------------------------------------->
+                <ul class="rounds round-3-left">
+                    <li class="spacer">&nbsp;</li>
+
+                    <li class="bracket pair-1-top">
+                         <label>
+                            <input type="radio" name="pair0-3" value="option1">
+                            {% if votes2.option_0_count == 1 and votes.option_0_count == 1 %}
+                               {{ artists.0 }}
+                            {% elif votes2.option_0_count == 1 and votes.option_1_count == 1 %}
+                               {{ artists.1 }}
+                            {% elif votes2.option_1_count == 1 and votes.option_2_count == 1 %}
+                               {{ artists.2 }}
+                            {% elif votes2.option_1_count == 1 and votes.option_3_count == 1 %}
+                               {{ artists.3 }}
+                            {% endif %}
+                            {{ vote2.winner1 }}
+                        </label>
+                    </li>
+
+                    <li class="bracket bracket-spacer-left">&nbsp;</li>
+                    <li class="bracket pair-1-bottom ">
+                        <label>
+                            <input type="radio" name="pair0-3" value="option2">
+                             {% if votes2.option_2_count == 1 and votes.option_4_count == 1 %}
+                               {{ artists.4 }}
+                            {% elif votes2.option_2_count == 1 and votes.option_5_count == 1 %}
+                               {{ artists.5 }}
+                            {% elif votes2.option_3_count == 1 and votes.option_6_count == 1 %}
+                               {{ artists.6 }}
+                            {% elif votes2.option_3_count == 1 and votes.option_7_count == 1 %}
+                               {{ artists.7 }}
+                            {% endif %}
+                            {{ vote2.winner2 }}
+                        </label>
+                    </li>
+
+                    <li class="spacer">&nbsp;</li>
+                </ul>
+<!--ROUND 4 LEFT ------------------------------------------------------------------->
+                <ul class="rounds round-4-left">
+                    <li class="spacer">&nbsp;</li>
+
+                    <li class="bracket pair-1-left">
+                        <input type="radio" name="pair0-4" value="option1">
+                            {% if votes3.option_0_count == 1 and votes2.option_0_count == 1 and votes.option_0_count == 1%}
+                               {{ artists.0 }}
+                            {% elif votes3.option_0_count == 1 and votes2.option_0_count == 1 and votes.option_1_count == 1%}
+                               {{ artists.1 }}
+                            {% elif votes3.option_0_count == 1 and votes2.option_1_count == 1 and votes.option_2_count == 1 %}
+                               {{ artists.2 }}
+                            {% elif votes3.option_0_count == 1 and votes2.option_1_count == 1 and votes.option_3_count == 1 %}
+                               {{ artists.3 }}
+                            {% elif votes3.option_1_count == 1 and votes2.option_2_count == 1 and votes.option_4_count == 1 %}
+                               {{ artists.4 }}
+                            {% elif votes3.option_1_count == 1 and votes2.option_2_count == 1 and votes.option_5_count == 1 %}
+                               {{ artists.5 }}
+                            {% elif votes3.option_1_count == 1 and votes2.option_3_count == 1 and votes.option_6_count == 1 %}
+                               {{ artists.6 }}
+                            {% elif votes3.option_1_count == 1 and votes2.option_3_count == 1 and votes.option_7_count == 1 %}
+                               {{ artists.7 }}
+                            {% endif %}
+                    </li>
+
+                    <li class="spacer">&nbsp;</li>
+                </ul>
+<!--ROUND 4 RIGHT ------------------------------------------------------------------>
+                <ul class="rounds round-4-right">
+                    <li class="spacer">&nbsp;</li>
+
+                    <li class="bracket pair-1-right ">
+                        <input type="radio" name="pair0-4" value="option2">
+                            {% if votes3.option_2_count == 1 and votes2.option_4_count == 1 and votes.option_8_count == 1%}
+                               {{ artists.8 }}
+                            {% elif votes3.option_2_count == 1 and votes2.option_4_count == 1 and votes.option_9_count == 1%}
+                               {{ artists.9 }}
+                            {% elif votes3.option_2_count == 1 and votes2.option_5_count == 1 and votes.option_10_count == 1 %}
+                               {{ artists.10 }}
+                            {% elif votes3.option_2_count == 1 and votes2.option_5_count == 1 and votes.option_11_count == 1 %}
+                               {{ artists.11 }}
+                            {% elif votes3.option_3_count == 1 and votes2.option_6_count == 1 and votes.option_12_count == 1 %}
+                               {{ artists.12 }}
+                            {% elif votes3.option_3_count == 1 and votes2.option_6_count == 1 and votes.option_13_count == 1 %}
+                               {{ artists.13 }}
+                            {% elif votes3.option_3_count == 1 and votes2.option_7_count == 1 and votes.option_14_count == 1 %}
+                               {{ artists.14 }}
+                            {% elif votes3.option_3_count == 1 and votes2.option_7_count == 1 and votes.option_15_count == 1 %}
+                               {{ artists.15 }}
+                            {% endif %}
+                    </li>
+
+                    <li class="spacer">&nbsp;</li>
+                </ul>
+<!--ROUND 3 RIGHT ------------------------------------------------------------------>
+                <ul class="rounds round-3-right">
+                    <li class="spacer">&nbsp;</li>
+
+                    <li class="bracket pair-2-top">
+                        <label>
+                            <input type="radio" name="pair1-3" value="option3">
+                            {% if votes2.option_4_count == 1 and votes.option_8_count == 1 %}
+                               {{ artists.8 }}
+                            {% elif votes2.option_4_count == 1 and votes.option_9_count == 1 %}
+                               {{ artists.9 }}
+                            {% elif votes2.option_5_count == 1 and votes.option_10_count == 1 %}
+                               {{ artists.10 }}
+                            {% elif votes2.option_5_count == 1 and votes.option_11_count == 1 %}
+                               {{ artists.11 }}
+                            {% endif %}
+                            {{ vote2.winner3 }}
+                        </label>
+                    </li>
+
+                    <li class="bracket bracket-spacer-right">&nbsp;</li>
+
+                    <li class="bracket pair-2-bottom ">
+                        <label>
+                            <input type="radio" name="pair1-3" value="option4">
+                            {% if votes2.option_6_count == 1 and votes.option_12_count == 1 %}
+                               {{ artists.12 }}
+                            {% elif votes2.option_6_count == 1 and votes.option_13_count == 1 %}
+                               {{ artists.13 }}
+                            {% elif votes2.option_7_count == 1 and votes.option_14_count == 1 %}
+                               {{ artists.14 }}
+                            {% elif votes2.option_7_count == 1 and votes.option_15_count == 1 %}
+                               {{ artists.15 }}
+                            {% endif %}
+                            {{ vote2.winner4 }}
+                        </label>
+                    </li>
+
+                    <li class="spacer">&nbsp;</li>
+                </ul>
+<!--ROUND 2 RIGHT ------------------------------------------------------------------>
+                <ul class="rounds round-2-right">
+                    <li class="spacer">&nbsp;</li>
+
+                    <li class="bracket pair-3-top">
+                        <label>
+                            <input type="radio" name="pair2-2" value="option4">
+                            <!--{{ vote.round2_0_count }}-->
+                            {% if votes.option_8_count %}
+                                {{ artists.8 }}
+                            {% elif votes.option_9_count %}
+                                {{ artists.9 }}
+                            {% endif %}
+                        </label>
+                    </li>
+                    <li class="bracket bracket-spacer-right">&nbsp;</li>
+                    <li class="bracket pair-3-bottom ">
+                        <label>
+                            <input type="radio" name="pair2-2" value="option5">
+                            <!--{{ vote.round2_1_count }}-->
+                             {% if votes.option_10_count %}
+                                {{ artists.10 }}
+                            {% elif votes.option_11_count %}
+                                {{ artists.11 }}
+                            {% endif %}
+                        </label>
+                    </li>
+
+                    <li class="spacer">&nbsp;</li>
+
+                    <li class="bracket pair-4-top">
+                        <label>
+                        <input type="radio" name="pair3-2" value="option6">
+                            <!--{{ vote.round2_pair3_1 }}-->
+                            {% if votes.option_12_count %}
+                                {{ artists.12 }}
+                            {% elif votes.option_13_count %}
+                                {{ artists.13 }}
+                            {% endif %}
+                        </label>
+                    </li>
+                    <li class="bracket bracket-spacer-right">&nbsp;</li>
+                    <li class="bracket pair-4-bottom ">
+                        <label>
+                        <input type="radio" name="pair3-2" value="option7">
+                            <!--{{ vote.round2_pair3_2 }}-->
+                            {% if votes.option_14_count %}
+                                {{ artists.14 }}
+                            {% elif votes.option_15_count %}
+                                {{ artists.15 }}
+                            {% endif %}
+                        </label>
+                    </li>
+
+                    <li class="spacer">&nbsp;</li>
+                </ul>
+<!--ROUND 1 RIGHT ------------------------------------------------------------------>
+                <ul class="rounds round-1-right">
+                    <li class="spacer">&nbsp;</li>
+
+                    <li class="bracket pair-5-top">
+                        <label>
+                            <input type="radio" name="pair4" value="option8">
+                            {{ artists.8 }}
+                            <img src="{{ images.8 }}" height="50px"/>
+                        </label>
+                    </li>
+                    <li class="bracket bracket-spacer-right">&nbsp;
+                    </li>
+                    <li class="bracket pair-5-bottom ">
+                        <label>
+                            <input type="radio" name="pair4" value="option9">
+                            {{ artists.9 }}<img src="{{ images.9 }}" height="50px"/>
+
+                        </label>
+                    </li>
+
+                    <li class="spacer">&nbsp;</li>
+
+                    <li class="bracket pair-6-top">
+                        <label>
+                            <input type="radio" name="pair5" value="option10">
+                            {{ artists.10 }}
+                            <img src="{{ images.10 }}" height="50px"/>
+
+                        </label>
+                    </li>
+                    <li class="bracket bracket-spacer-right">&nbsp;</li>
+                    <li class="bracket pair-6-bottom ">
+                        <label>
+                            <input type="radio" name="pair5" value="option11">
+                            {{ artists.11 }}
+                            <img src="{{ images.11 }}" height="50px"/>
+
+                        </label>
+                    </li>
+
+                    <li class="spacer">&nbsp;</li>
+
+                    <li class="bracket pair-7-top">
+                        <label>
+                            <input type="radio" name="pair6" value="option12">
+                            {{ artists.12 }}
+                            <img src="{{ images.12 }}" height="50px"/>
+                        </label>
+                    </li>
+                    <li class="bracket bracket-spacer-right">&nbsp;
+                    </li>
+                    <li class="bracket pair-7-bottom ">
+                        <label>
+                            <input type="radio" name="pair6" value="option13">
+                            {{ artists.13 }}
+                            <img src="{{ images.13 }}" height="50px"/>
+                        </label>
+                    </li>
+
+                    <li class="spacer">&nbsp;</li>
+
+                    <li class="bracket pair-8-top">
+                        <label>
+                            <input type="radio" name="pair7" value="option14">
+                            {{ artists.14 }}
+                            <img src="{{ images.14 }}" height="50px"/>
+                        </label>
+                    </li>
+                    <li class="bracket bracket-spacer-right">&nbsp;</li>
+                    <li class="bracket pair-8-bottom ">
+                        <label>
+                            <input type="radio" name="pair7" value="option15">
+                            {{ artists.15 }}
+                            <img src="{{ images.15 }}" height="50px"/>
+                        </label>
+                    </li>
+
+                    <!--<label>
+                        <input type="radio" name="clear" value="option">
+                        Clear All Votes
+                    </label>-->
+                    <br>
+                    <button type="submit" class="btn btn-info">
+                        Submit
+                    </button>
+                    <br>
+
+                    <li class="spacer">&nbsp;</li>
+                </ul>
+            </main>
+            <h3 style="position: absolute; bottom: 0; left: 38%; width:100%; font-size:30px">
+                <!-- print final winner below-->
+                The Winner is:
+                {% if votes4.option_0_count == 1 and votes3.option_0_count == 1 and votes2.option_0_count == 1 and votes.option_0_count == 1%}
+                    {{ artists.0 }}
+                {% elif votes4.option_0_count == 1 and votes3.option_0_count == 1 and votes2.option_0_count == 1 and votes.option_1_count == 1%}
+                    {{ artists.1 }}
+                {% elif votes4.option_0_count == 1 and votes3.option_0_count == 1 and votes2.option_1_count == 1 and votes.option_2_count == 1 %}
+                    {{ artists.2 }}
+                {% elif votes4.option_0_count == 1 and votes3.option_0_count == 1 and votes2.option_1_count == 1 and votes.option_3_count == 1 %}
+                    {{ artists.3 }}
+                {% elif votes4.option_0_count == 1 and votes3.option_1_count == 1 and votes2.option_2_count == 1 and votes.option_4_count == 1 %}
+                    {{ artists.4 }}
+                {% elif votes4.option_0_count == 1 and votes3.option_1_count == 1 and votes2.option_2_count == 1 and votes.option_5_count == 1 %}
+                    {{ artists.5 }}
+                {% elif votes4.option_0_count == 1 and votes3.option_1_count == 1 and votes2.option_3_count == 1 and votes.option_6_count == 1 %}
+                    {{ artists.6 }}
+                {% elif votes4.option_0_count == 1 and votes3.option_1_count == 1 and votes2.option_3_count == 1 and votes.option_7_count == 1 %}
+                    {{ artists.7 }}
+                {% elif votes4.option_1_count == 1 and votes3.option_2_count == 1 and votes2.option_4_count == 1 and votes.option_8_count == 1%}
+                    {{ artists.8 }}
+                {% elif votes4.option_1_count == 1 and votes3.option_2_count == 1 and votes2.option_4_count == 1 and votes.option_9_count == 1%}
+                    {{ artists.9 }}
+                {% elif votes4.option_1_count == 1 and votes3.option_2_count == 1 and votes2.option_5_count == 1 and votes.option_10_count == 1 %}
+                    {{ artists.10 }}
+                {% elif votes4.option_1_count == 1 and votes3.option_2_count == 1 and votes2.option_5_count == 1 and votes.option_11_count == 1 %}
+                    {{ artists.11 }}
+                {% elif votes4.option_1_count == 1 and votes3.option_3_count == 1 and votes2.option_6_count == 1 and votes.option_12_count == 1 %}
+                    {{ artists.12 }}
+                {% elif votes4.option_1_count == 1 and votes3.option_3_count == 1 and votes2.option_6_count == 1 and votes.option_13_count == 1 %}
+                    {{ artists.13 }}
+                {% elif votes4.option_1_count == 1 and votes3.option_3_count == 1 and votes2.option_7_count == 1 and votes.option_14_count == 1 %}
+                    {{ artists.14 }}
+                {% elif votes4.option_1_count == 1 and votes3.option_3_count == 1 and votes2.option_7_count == 1 and votes.option_15_count == 1 %}
+                    {{ artists.15 }}
+                {% endif %}!
+            </h3>
+        </form>
+    </body>
+</html>
+

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<h2>Artists:</h2>
+<ul>
+    {% for item in art %}
+        <li>Artist name: {{ item.artist }} -- <img src="{{ item.a_img }}" height="50px"/> </li>
+    {% endfor %}
+</ul>
